@@ -5,14 +5,15 @@ const TodoModel = mongoose.model("Todo");
 
 const createTodo =  async (request, response, next) => {
 
-    await TodoModel.create(request.body, function(err, res){
-        if(err)
-        {
-            response.send({statusCode: 500, error:err });
-        }
-        response.send({status:200, data: res});
-    });
-
+    // await TodoModel.create(request.body, function(err, res){
+    //     if(err)
+    //     {
+    //         response.send({statusCode: 500, error:err });
+    //     }
+    //     response.send({status:200, data: res});
+    // });
+    const createData = await TodoModel.create(request.body);
+    response.status(201).json(createData);
 }
 
 const getTodo = async(req, response) => {

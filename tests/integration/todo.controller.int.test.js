@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../../app');
 const newTodo = require('../mockData/new-todo.json');
 
-const endpointUrl = '/todos/';
+const endpointUrl = '/';
 
 describe(endpointUrl, () => {
     it("POST " + endpointUrl, async () => {
