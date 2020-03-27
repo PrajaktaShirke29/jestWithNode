@@ -1,8 +1,14 @@
 const mongoose= require('mongoose');
 
 const TodoScheme = new mongoose.Schema({
-    title: String,
-    done: Boolean
+    title: {
+        type: String,
+        required: true
+    },
+    done: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const Todo = mongoose.model('Todo', TodoScheme, 'Todo');
