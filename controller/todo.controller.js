@@ -14,16 +14,48 @@ const createTodo =  async (request, response, next) => {
 
 const getTodo = async(req, response, next) => {
     try{
-        const getData = await TodoModel.find();
+        const getData = await TodoModel.find({});
         response.status(201).json(getData);
     }catch(err){
         next(err);
     }
 }
-     
 
+const getTodoById = async(req, res, next) => {
+    try{
+        console.log(req.params.id);
+        const getData = await TodoModel.findById({_id: req.params.id});
+        if(getData)
+            res.status(201).json(getData);
+        else    
+            res.status(404).json({message: "Data Not Found"});
+    } catch (error){
+        next(error);
+    }
+}
+     
+const deleteTodoById = async(req, res, next) => {
+    try{
+        const deleteData = await TodoModel.deleteOne({_id: req.params.id});
+        res.status(201).json(deleteData);
+    }catch(error){
+        next(error)
+    }
+}
+
+const updateById = async (req, res, next) => {
+    try{
+        const updateData = await TodoModel.updateOne({"_id": req.body._id}, {$set: req.body}, {upsert: true});
+        res.status(201).json(updateData);
+    } catch(err){
+        next(err);
+    }
+}
 
 module.exports= {
     createTodo,
-    getTodo
+    getTodo,
+    getTodoById,
+    deleteTodoById,
+    updateById
 }
