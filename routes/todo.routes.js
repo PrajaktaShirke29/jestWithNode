@@ -9,5 +9,5 @@ router.get('/todo/:id', todoController.getTodoById);
 
 router.delete('/todo/:id', todoController.deleteTodoById);
 
-router.put('/todo', todoController.updateById);
+router.put('/todo/:id', todoController.updateById);
 module.exports= router;
